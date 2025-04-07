@@ -1,0 +1,48 @@
+﻿<!--
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ *
+ * Created By: Alexander Bascevan
+ *
+ * Created On: April 7, 2025
+ * Updated On:
+ *
+ * Purpose: Rating view that allows a user to rate a specific song in their library out of 5 stars
+ *
+ -->
+
+@model Moosic.Models.LibraryItem
+
+@{
+    ViewData["Title"] = "Rate Song";
+}
+
+<h2>Rate Song</h2>
+
+<div class="card" style="width: 18rem;">
+    @if (Model.Music != null)
+    {
+        <img src="@Model.Music.ImageUrl" class="card-img-top" alt="Cover" />
+        <div class="card-body">
+            <h5 class="card-title">@Model.Music.Title</h5>
+            <p class="card-text">@Model.Music.Artist</p>
+        </div>
+    }
+</div>
+
+<form asp-action="Rating" method="post">
+    <input type="hidden" name="libraryId" value="@Model.LibraryId" />
+    <div class="form-group">
+        <label for="rating">Select Rating (1 to 5):</label>
+        <select name="rating" id="rating" class="form-control" required>
+            <option value="">--Select--</option>
+            @for (int i = 1; i <= 5; i++)
+            {
+                <option value="@i">@i Star@(i > 1 ? "s" : "")</option>
+            }
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit Rating</button>
+    <a href="@Url.Action("Library", "Account")" class="btn btn-secondary">Cancel</a>
+</form>

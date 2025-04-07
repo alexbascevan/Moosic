@@ -1,0 +1,50 @@
+﻿<!--
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ *
+ * Created By: Alexander Bascevan
+ *
+ * Created On: April 7, 2025
+ * Updated On:
+ *
+ * Purpose: Search results view that displays the results fetched from Spotify API from search.cshtml
+ *
+ -->
+
+@model List<Moosic.Models.Music>
+@using System.Linq
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>Search Results</h2>
+
+<div style="margin-bottom:20px;">
+    <a href="@Url.Action("Search", "Music")" class="btn btn-secondary" style="margin-right:10px;">Return to Search</a>
+    <a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>@item.Title</strong> - @item.Artist
+                </div>
+                <a href="@Url.Action("AddToLibrary", "Music", new {
+                        id = item.ApiId,
+                        title = item.Title,
+                        artist = item.Artist,
+                        album = item.Album,
+                        imageUrl = item.ImageUrl
+                    })" class="btn btn-success">Add to Library</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No results found.</p>
+}

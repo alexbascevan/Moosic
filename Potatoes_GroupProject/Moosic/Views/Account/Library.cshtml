@@ -1,0 +1,57 @@
+﻿<!--
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ *
+ * Created By: Alexander Bascevan
+ *
+ * Created On: April 7, 2025
+ * Updated On:
+ *
+ * Purpose: User music Library view that allows a user to view any songs/song details that have been added to their library
+ *
+ -->
+
+@model List<Moosic.Models.LibraryItem>
+@using System.Linq
+@{
+    ViewData["Title"] = "My Music Library";
+}
+
+<h2>My Music Library</h2>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    @if (item.Music != null)
+                    {
+                        <img src="@item.Music.ImageUrl" alt="Cover" style="width: 60px; height: 60px; margin-right: 10px;" />
+                        <div>
+                            <strong>@item.Music.Title</strong> <br />
+                            <span>@item.Music.Artist</span>
+                        </div>
+                    }
+                </div>
+                <div>
+                    @if (item.Rating.HasValue)
+                    {
+                        <span class="badge bg-success">Rating: @item.Rating/5</span>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Rating", "Music", new { libraryId = item.LibraryId })" class="btn btn-warning btn-sm">Rate</a>
+                    }
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Your library is empty. Start by adding some music!</p>
+}
+
+<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>
