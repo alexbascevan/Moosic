@@ -84,7 +84,7 @@ namespace Moosic.Controllers
             var result = _passwordHasher.VerifyHashedPassword(user, user.password, password);
             if (result == PasswordVerificationResult.Success)
             {
-                TempData["Message"] = $"Welcome, {user.userName}!";
+                TempData["UserName"] = user.userName;
                 return RedirectToAction("Dashboard", "Account"); // redirect to dashboard
             }
 
