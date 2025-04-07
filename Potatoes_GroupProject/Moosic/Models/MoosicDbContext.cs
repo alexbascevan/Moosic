@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Moosic.Models
-{
-
-    /*
+﻿/*
 * Group Name: Potatoes
 * Project Name: Moosic
 * 
@@ -16,6 +11,11 @@ namespace Moosic.Models
 * 
 * API: https://reccobeats.com/docs/apis/get-recommendation
 */
+
+using Microsoft.EntityFrameworkCore;
+
+namespace Moosic.Models
+{
     public class MoosicDbContext : DbContext
     {
 

@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Moosic.Models;
-
-/*
+﻿/*
 * Group Name: Potatoes
 * Project Name: Moosic
 * 
@@ -14,6 +10,11 @@ using Moosic.Models;
 * Purpose: Account Controller Class to handle regisration and login, as well as the user dashboard
 * 
 */
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Moosic.Models;
 
 namespace Moosic.Controllers
 {
@@ -85,6 +86,7 @@ namespace Moosic.Controllers
             if (result == PasswordVerificationResult.Success)
             {
                 TempData["UserName"] = user.userName;
+                HttpContext.Session.SetInt32("UserId", user.UserId);
                 return RedirectToAction("Dashboard", "Account"); // redirect to dashboard
             }
 
@@ -99,7 +101,24 @@ namespace Moosic.Controllers
             return View();
         }
 
+        // GET: /Account/Library
+        public async Task<IActionResult> Library()
+        {
+            // Get the logged-in user's id from session
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login");
+            }
 
+            // Load the user's library items along with associated Music details.
+            var libraryItems = await _context.LibraryItems
+                .Include(li => li.Music)
+                .Where(li => li.UserId == userId.Value)
+                .ToListAsync();
+
+            return View(libraryItems);
+        }
 
     }
 }

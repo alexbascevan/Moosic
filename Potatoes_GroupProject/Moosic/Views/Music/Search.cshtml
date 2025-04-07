@@ -1,0 +1,25 @@
+﻿<!--
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ *
+ * Created By: Alexander Bascevan
+ *
+ * Created On: April 7, 2025
+ * Updated On:
+ *
+ * Purpose: Search view that interacts with Spotify API to search for songs, albums, and artists
+ *
+ -->
+
+@{
+    ViewData["Title"] = "Search for Music";
+}
+
+<h2>Search for Music</h2>
+
+<form method="get" asp-action="SearchResults" asp-controller="Music">
+    <input type="text" name="query" placeholder="Search for a song, album, or artist" class="form-control" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>

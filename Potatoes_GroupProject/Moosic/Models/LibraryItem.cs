@@ -1,21 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*
+* Group Name: Potatoes
+* Project Name: Moosic
+* 
+* Created By: Mariah Falzon 
+* 
+* Created On: April 6, 2025
+* Updated On: 
+* 
+* Purpose: Class to handle adding any music or rating to users library
+* 
+* API: https://developer.spotify.com/documentation/web-api/tutorials/getting-started
+*/
+
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Moosic.Models
 {
-    /*
- * Group Name: Potatoes
- * Project Name: Moosic
- * 
- * Created By: Mariah Falzon 
- * 
- * Created On: April 6, 2025
- * Updated On: 
- * 
- * Purpose: Class to handle adding any music or rating to users library
- * 
- * API: https://developer.spotify.com/documentation/web-api/tutorials/getting-started
- */
     public class LibraryItem
     {
         [Key]

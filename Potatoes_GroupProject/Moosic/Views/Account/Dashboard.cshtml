@@ -1,6 +1,33 @@
-﻿@{
+﻿<!--
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ *
+ * Created By: Alexander Bascevan
+ *
+ * Created On: April 7, 2025
+ * Updated On:
+ *
+ * Purpose: User Dashboard view that allows users to search for new music or view their own library
+ *
+ -->
+
+
+@{
     ViewData["Title"] = "Dashboard";
     var userName = ViewBag.UserName ?? "User";
 }
 
-<h1>Welcome, @userName!</h1>
+<div class="text-center">
+    <h1>Welcome, @userName!</h1>
+
+    <p>What would you like to do?</p>
+
+    <div style="margin-top: 20px;">
+        <a href="@Url.Action("Search", "Music")" class="btn btn-primary" style="margin-right: 10px;">Search for Music</a>
+        <a href="@Url.Action("Library", "Account")" class="btn btn-secondary">View Library</a>
+    </div>
+</div>
+
+<br />
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Logout</a>

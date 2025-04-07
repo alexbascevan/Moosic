@@ -1,22 +1,24 @@
+/*
+* Group Name: Potatoes
+* Project Name: Moosic
+* 
+* Created By: Mariah Falzon 
+* 
+* Created On: April 6, 2025
+* Updated On: s
+* 
+* Purpose: Home Controller to Display the API of Getting The New Albums
+* 
+* 
+*/
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Moosic.Models;
 using Moosic.Services;
 
 namespace Moosic.Controllers
-{    /*
- * Group Name: Potatoes
- * Project Name: Moosic
- * 
- * Created By: Mariah Falzon 
- * 
- * Created On: April 6, 2025
- * Updated On: s
- * 
- * Purpose: Home Controller to Display the API of Getting The New Albums
- * 
- * 
- */
+{   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -36,11 +38,6 @@ namespace Moosic.Controllers
         {
             var releases = await _apiService.GetNewReleases();
             return View(releases);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
