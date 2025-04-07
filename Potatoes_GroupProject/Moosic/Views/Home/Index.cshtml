@@ -1,0 +1,39 @@
+﻿<!--
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ *
+ * Created By: Mariah Falzon & Alexander Bascevan
+ *
+ * Created On: April 7, 2025
+ * Updated On:
+ *
+ * Purpose: Home page that has links to login, sign up, and also displays recent spotify songs
+ *
+ -->
+
+@model List<Music>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Welcome to Moosic</p>
+</div>
+
+<!-- Links to the SignUp and Login pages -->
+<p>
+    <a href="@Url.Action("SignUp", "Account")">Sign Up</a> |
+    <a href="@Url.Action("Login", "Account")">Login</a>
+</p>
+
+
+<h2>New Releases</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <strong>@item.Album</strong> by @item.Artist 
+        </li>
+    }
+</ul>
