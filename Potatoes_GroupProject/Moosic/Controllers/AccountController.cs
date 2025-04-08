@@ -5,9 +5,11 @@
 * Created By: Alexander Bascevan
 * 
 * Created On: April 7, 2025
-* Updated On: 
+* Updated On: April 7, 2025
 * 
 * Purpose: Account Controller Class to handle regisration and login, as well as the user dashboard
+* 
+* Comments: Added the Display New Releases On Dashboard - Mariah
 * 
 */
 
@@ -15,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moosic.Models;
+using Moosic.Services;
 
 namespace Moosic.Controllers
 {
@@ -23,10 +26,13 @@ namespace Moosic.Controllers
         private readonly MoosicDbContext _context;
         private readonly PasswordHasher<User> _passwordHasher;
 
-        public AccountController(MoosicDbContext context)
+        //Injecting the APIService 
+        private readonly ApiService _apiService;
+        public AccountController(MoosicDbContext context, ApiService apiService)
         {
             _context = context;
             _passwordHasher = new PasswordHasher<User>();
+            _apiService = apiService;
         }
 
         // GET: /Account/SignUp
@@ -95,10 +101,11 @@ namespace Moosic.Controllers
         }
 
         [HttpGet]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            var releases = await _apiService.GetNewReleases();
             ViewBag.UserName = TempData["UserName"];
-            return View();
+            return View(releases);
         }
 
         // GET: /Account/Library

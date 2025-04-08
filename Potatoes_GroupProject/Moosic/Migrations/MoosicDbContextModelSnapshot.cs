@@ -74,6 +74,15 @@ namespace Moosic.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("popularity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("releaseDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("totalTracks")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("MusicItems");

@@ -16,7 +16,7 @@ namespace Moosic.Services
  * Created By: Mariah Falzon 
  * 
  * Created On: April 6, 2025
- * Updated On: 
+ * Updated On: April 7 2025
  * 
  * Purpose: Service Class to call the API information
  * 
@@ -24,6 +24,8 @@ namespace Moosic.Services
  * 
  * 
  * https://developer.spotify.com/documentation/web-api/reference/search
+ * 
+ * Comments: Updating the API Service with extra API Details
  */
     public class ApiService
     {
@@ -78,6 +80,9 @@ namespace Moosic.Services
                         .EnumerateArray()
                         .Select(artist => artist.GetProperty("name").GetString())),
                         Album = track.GetProperty("album").GetProperty("name").GetString(),
+                        releaseDate = track.GetProperty("album").GetProperty("release_date").GetString(),
+                        totalTracks = track.GetProperty("album").GetProperty("total_tracks").GetInt32().ToString(),
+                        popularity = track.GetProperty("popularity").GetInt32().ToString(),
                         ImageUrl = track.GetProperty("album").GetProperty("images")
                             .EnumerateArray().FirstOrDefault().GetProperty("url").GetString() //getting the URL from the images JSON
                    
@@ -96,19 +101,21 @@ namespace Moosic.Services
                     results.Add(new Music
                     {
                         ApiId = a.GetProperty("id").GetString(), //id property to the APIid
-                        Title = a.GetProperty("name").GetString(), //name of album 
+                        Title = null, //no track title
                         Artist = string.Join(", ", a.GetProperty("artists") //name of artist to artist in music
                         .EnumerateArray()
                         .Select(artist => artist.GetProperty("name").GetString())),
-                        Album = a.GetProperty("album").GetProperty("name").GetString(),
-                        ImageUrl = a.GetProperty("album").GetProperty("images")
+                        Album = a.GetProperty("name").GetString(), //name of album
+                        releaseDate = a.GetProperty("release_date").GetString(),
+                        totalTracks = a.GetProperty("total_tracks").GetInt32().ToString(),
+                        popularity = null, //no popularity for the album in API
+                        ImageUrl = a.GetProperty("images")
                             .EnumerateArray().FirstOrDefault().GetProperty("url").GetString() //getting the URL from the images JSON
 
                     });
                 }
             }
-
-
+          
             return results;
         }
 
@@ -125,17 +132,21 @@ namespace Moosic.Services
             var musicList = new List<Music>();
 
 
-            foreach (var album in response.GetProperty("albums").GetProperty("items").EnumerateArray())
+            foreach (var a in response.GetProperty("albums").GetProperty("items").EnumerateArray())
             {
                 musicList.Add(new Music
                 {
-                    ApiId = album.GetProperty("id").GetString(),
-                    Title = null, //as there is no track title for an album
-                    Artist = string.Join(", ", album.GetProperty("artists")
+                    ApiId = a.GetProperty("id").GetString(), //id property to the APIid
+                    Title = null, //no track title
+                    Artist = string.Join(", ", a.GetProperty("artists") //name of artist to artist in music
                         .EnumerateArray()
                         .Select(artist => artist.GetProperty("name").GetString())),
-                    Album = album.GetProperty("name").GetString(),
-                    ImageUrl = album.GetProperty("images").EnumerateArray().FirstOrDefault().GetProperty("url").GetString()
+                    Album = a.GetProperty("name").GetString(), //name of album
+                    releaseDate = a.GetProperty("release_date").GetString(),
+                    totalTracks = a.GetProperty("total_tracks").GetInt32().ToString(),
+                    popularity = null, //no popularity for the album in API
+                    ImageUrl = a.GetProperty("images")
+                            .EnumerateArray().FirstOrDefault().GetProperty("url").GetString() //getting the URL from the images JSON
                 });
             }
 

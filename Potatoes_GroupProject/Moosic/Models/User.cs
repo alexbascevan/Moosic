@@ -3,6 +3,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Moosic.Models
 {
+    /*
+ * Group Name: Potatoes
+ * Project Name: Moosic
+ * 
+ * Created By: Alexander Bascevan
+ * 
+ * Created On: April 6, 2025
+ * Updated On: April 7 2025
+ * 
+ * Purpose: Class to handle specific user information 
+
+ */
     public class User
     {
         [Key]

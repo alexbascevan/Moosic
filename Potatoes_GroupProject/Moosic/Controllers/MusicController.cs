@@ -9,6 +9,8 @@
 * 
 * Purpose: Music Controller Class to handle searching for music, ratings and adding to library
 * 
+* Comments: Since I added more API information, I had to update the methods - mariah
+* 
 */
 
 using Microsoft.AspNetCore.Mvc;
@@ -39,26 +41,25 @@ namespace Moosic.Controllers
 
         // GET: /Music/SearchResults?query=SearchTerm
         [HttpGet]
-        public async Task<IActionResult> SearchResults(string query)
+        public async Task<IActionResult> SearchResults(string query, string type = "track") //add a type 
         {
             if (string.IsNullOrEmpty(query))
             {
                 return View(new List<Music>());
             }
 
-            var searchResults = await _apiService.SearchForMusic(query, "track"); // Searching for tracks
+            var searchResults = await _apiService.SearchForMusic(query, type.ToLower()); // Searching for track, album or artist
             return View(searchResults);
         }
 
         // GET: /Music/AddToLibrary/{id}?title=...&artist=...&album=...&imageUrl=...
         [HttpGet]
-        public async Task<IActionResult> AddToLibrary(string id, string title, string artist, string album, string imageUrl)
+        public async Task<IActionResult> AddToLibrary(string id, string title, string artist, string album, string imageUrl, string totalTrack, string releaseDate, string popularity)
         {
             // Retrieve logged-in user's id from session
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
-                // Not logged in; redirect to login.
                 return RedirectToAction("Login", "Account");
             }
 
@@ -73,6 +74,9 @@ namespace Moosic.Controllers
                     Artist = artist,
                     Album = album,
                     ImageUrl = imageUrl,
+                    totalTracks = totalTrack,  
+                    releaseDate = releaseDate,
+                    popularity = popularity,
                     ApiId = id
                 };
                 _context.MusicItems.Add(musicRecord);
@@ -90,9 +94,9 @@ namespace Moosic.Controllers
             _context.LibraryItems.Add(libraryItem);
             await _context.SaveChangesAsync();
 
-            // Redirect to the Account Library page.
             return RedirectToAction("Library", "Account");
         }
+
 
         // GET: /Music/Rating?libraryId=...
         [HttpGet]

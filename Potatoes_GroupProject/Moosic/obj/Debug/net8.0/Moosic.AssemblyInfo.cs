@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Moosic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e1074ffdacc2f54963c6eea3e24d123d39e4de4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+329acd2b2fd5e35aec97852d7b5d5089cc554511")]
 [assembly: System.Reflection.AssemblyProductAttribute("Moosic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Moosic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

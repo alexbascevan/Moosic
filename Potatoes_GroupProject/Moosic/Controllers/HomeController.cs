@@ -5,9 +5,10 @@
 * Created By: Mariah Falzon 
 * 
 * Created On: April 6, 2025
-* Updated On: s
+* Updated On: April 7 2025
 * 
 * Purpose: Home Controller to Display the API of Getting The New Albums
+* Comments: REmoved the API for getting new releases wanted to include it on the Dashboard
 * 
 * 
 */
@@ -23,21 +24,19 @@ namespace Moosic.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        //Injecting the APIService I created
-        private readonly ApiService _apiService;
+ 
 
-        public HomeController(ILogger<HomeController> logger, ApiService apiService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _apiService = apiService;
+            
         }
 
       
         //Will Display New Releases On The Main Screen
        public async Task<IActionResult> Index()
         {
-            var releases = await _apiService.GetNewReleases();
-            return View(releases);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

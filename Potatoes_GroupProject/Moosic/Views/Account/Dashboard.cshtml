@@ -5,29 +5,45 @@
  * Created By: Alexander Bascevan
  *
  * Created On: April 7, 2025
- * Updated On:
+ * Updated On: Aprl 7, 2025
  *
  * Purpose: User Dashboard view that allows users to search for new music or view their own library
  *
+ Comments: ADDED CONSISTENT CSS Styling -Mariah
  -->
-
-
 @{
     ViewData["Title"] = "Dashboard";
     var userName = ViewBag.UserName ?? "User";
 }
 
-<div class="text-center">
-    <h1>Welcome, @userName!</h1>
+<div class="container text-light mt-5">
+    <div class="text-center mb-4">
+        <h1 class="text-purple">Welcome, @userName!</h1>
+        <p>What would you like to do?</p>
 
-    <p>What would you like to do?</p>
+        <div class="mt-4">
+            <a href="@Url.Action("Search", "Music")" class="btn btn-primary btn-lg me-3">Search for Music</a>
+            <a href="@Url.Action("Library", "Account")" class="btn btn-outline-light btn-lg">View Library</a>
+        </div>
+    </div>
 
-    <div style="margin-top: 20px;">
-        <a href="@Url.Action("Search", "Music")" class="btn btn-primary" style="margin-right: 10px;">Search for Music</a>
-        <a href="@Url.Action("Library", "Account")" class="btn btn-secondary">View Library</a>
+    <div class="text-center mb-5">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary mt-3">Logout</a>
+    </div>
+
+    <div class="bg-dark rounded p-4 shadow">
+        <h2 class="text-purple">New Releases</h2>
+        <ul class="list-unstyled">
+            @foreach (var item in Model)
+            {
+                <li class="d-flex align-items-center mb-3">
+                    <img src="@item.ImageUrl" alt="Cover" class="rounded me-3" style="width: 60px; height: 60px;" />
+                    <div>
+                        <strong>@item.Album</strong> by @item.Artist
+                        <small class="text-muted">Released: @item.releaseDate</small>
+                    </div>
+                </li>
+            }
+        </ul>
     </div>
 </div>
-
-<br />
-
-<a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Logout</a>

@@ -17,6 +17,85 @@ html {
   min-height: 100%;
 }
 
+/* Optional: hover effect for secondary (outline) button */
+.btn-outline-light:hover {
+    background-color: #c084fc;
+    color: #121212;
+    border-color: #c084fc;
+}
+
+/* Dark Theme Background */
 body {
-  margin-bottom: 60px;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Purple Theme Primary Button */
+.btn-primary {
+    background-color: #c084fc;
+    border-color: #a855f7;
+}
+
+    .btn-primary:hover {
+        background-color: #a855f7;
+        border-color: #9333ea;
+    }
+
+/* Custom form styling */
+form.bg-dark {
+    background-color: #1f1f1f;
+}
+
+/* Optional: box shadow */
+.shadow-lg {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.5) !important;
+}
+
+/* General page background and text */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Purple accent heading */
+.text-purple {
+    color: #c084fc;
+}
+
+/* Primary button styling */
+.btn-primary {
+    background-color: #c084fc;
+    border-color: #a855f7;
+}
+
+    .btn-primary:hover {
+        background-color: #a855f7;
+        border-color: #9333ea;
+    }
+
+/* Outline-light variant */
+.btn-outline-light {
+    color: #ffffff;
+    border-color: #c084fc;
+}
+
+    .btn-outline-light:hover {
+        background-color: #c084fc;
+        color: #121212;
+    }
+
+/* Card-style section for new releases */
+.bg-dark {
+    background-color: #1e1e1e !important;
+}
+
+/* Rounded album images */
+img.rounded {
+    border-radius: 8px;
+}
+
+/* Optional: list spacing */
+ul.list-unstyled li {
+    border-bottom: 1px solid #2e2e2e;
+    padding-bottom: 10px;
 }
