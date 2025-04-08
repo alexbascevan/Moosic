@@ -5,34 +5,34 @@
  * Created By: Mariah Falzon & Alexander Bascevan
  *
  * Created On: April 7, 2025
- * Updated On:
+ * Updated On: 
  *
- * Purpose: Home page that has links to login, sign up, and also displays recent spotify songs
+ * Purpose: Home page that has links to login, sign up
+
+ Comments: Added Styling to Main page 
  *
  -->
-
 @model List<Music>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Moosic</h1>
+<div class="text-center my-5">
+    <h1 class="display-4 text-light">Welcome to <span style="color: #c084fc;">Moosic</span></h1>
 </div>
 
-<!-- Links to the SignUp and Login pages -->
-<p>
-    <a href="@Url.Action("SignUp", "Account")" class="btn btn-primary" style="margin-right: 10px;">Sign Up</a> 
-    <a href="@Url.Action("Login", "Account")" class="btn btn-secondary">Login</a>
-</p>
+<div class="container text-center text-light mb-4">
+    <h3>
+        A web-based application designed to help users discover new music, organize their library and review music based on preferences.
+        By integrating an external music API, the system will allow users to discover new music, view music details, and add songs to their library.
+    </h3>
+</div>
+
+<!-- Centered Buttons -->
+<div class="text-center my-4">
+    <a href="@Url.Action("SignUp", "Account")" class="btn btn-lg btn-primary me-3 px-5" >Sign Up</a>
+    <a href="@Url.Action("Login", "Account")" class="btn btn-lg btn-outline-light px-5">Login</a>
+</div>
 
 
-<h2>New Releases</h2>
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            <strong>@item.Album</strong> by @item.Artist 
-        </li>
-    }
-</ul>
+

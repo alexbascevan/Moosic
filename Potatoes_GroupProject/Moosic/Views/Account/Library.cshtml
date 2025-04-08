@@ -2,43 +2,64 @@
  * Group Name: Potatoes
  * Project Name: Moosic
  *
- * Created By: Alexander Bascevan
+ * Created By: Mariah Falzon
  *
  * Created On: April 7, 2025
  * Updated On:
  *
  * Purpose: User music Library view that allows a user to view any songs/song details that have been added to their library
  *
+ Comment: Changed the information that will be displayed in the Library to make it more detailed based on the API - mariah
  -->
 
-@model List<Moosic.Models.LibraryItem>
+@model List<LibraryItem>
 @using System.Linq
 @{
     ViewData["Title"] = "My Music Library";
 }
 
-<h2>My Music Library</h2>
+<h2 class="text-center my-4">My Music Library</h2>
 
 @if (Model != null && Model.Any())
 {
     <ul class="list-group">
         @foreach (var item in Model)
         {
-            <li class="list-group-item d-flex align-items-center justify-content-between">
+            <li class="list-group-item shadow-sm mb-3 rounded d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     @if (item.Music != null)
                     {
-                        <img src="@item.Music.ImageUrl" alt="Cover" style="width: 60px; height: 60px; margin-right: 10px;" />
+                        <img src="@item.Music.ImageUrl" alt="Cover" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;" />
+
                         <div>
-                            <strong>@item.Music.Title</strong> <br />
-                            <span>@item.Music.Artist</span>
+                            <!-- Track View -->
+                            @if (!string.IsNullOrEmpty(item.Music.Title))
+                            {
+                                <h5 class="mb-1">@item.Music.Title</h5>
+                                <p class="mb-1 text-muted">🎤 @item.Music.Artist</p>
+                                <p class="mb-1">💿 @item.Music.Album</p>
+                                <small class="text-muted me-3">🗓 @item.Music.releaseDate</small>
+                                <small class="text-muted me-3">🎶 Tracks: @item.Music.totalTracks</small>
+                                <small class="text-muted">🔥 Popularity: @item.Music.popularity</small>
+                            }
+
+                            <!-- Album View -->
+                            @if (!string.IsNullOrEmpty(item.Music.Album) && string.IsNullOrEmpty(item.Music.Title))
+                            {
+                                <h5 class="mb-1">@item.Music.Album</h5>
+                                <p class="mb-1 text-muted">🎤 @item.Music.Artist</p>
+                                <small class="text-muted me-3">🗓 @item.Music.releaseDate</small>
+                                <small class="text-muted">🎶 Tracks: @item.Music.totalTracks</small>
+                            }
+
+            
                         </div>
                     }
                 </div>
-                <div>
+                <div class="text-end">
                     @if (item.Rating.HasValue)
                     {
-                        <span class="badge bg-success">Rating: @item.Rating/5</span>
+                        <span class="badge bg-success fs-6">⭐ @item.Rating/5</span>
                     }
                     else
                     {
@@ -51,7 +72,12 @@
 }
 else
 {
-    <p>Your library is empty. Start by adding some music!</p>
+    <div class="alert alert-info text-center mt-4">
+        Your library is empty. Start by adding some music! 🎧
+    </div>
 }
 
-<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>
+<div class="text-center mt-4">
+    <a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>
+</div>
+

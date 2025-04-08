@@ -10,16 +10,30 @@
  * Purpose: Search view that interacts with Spotify API to search for songs, albums, and artists
  *
  -->
-
 @{
     ViewData["Title"] = "Search for Music";
 }
 
-<h2>Search for Music</h2>
+<h2 class="text-center my-4">🔍 Search for Music</h2>
 
-<form method="get" asp-action="SearchResults" asp-controller="Music">
-    <input type="text" name="query" placeholder="Search for a song, album, or artist" class="form-control" />
-    <button type="submit" class="btn btn-primary">Search</button>
+<form method="get" asp-action="SearchResults" asp-controller="Music" class="mb-4">
+    <div class="row g-2">
+        <div class="col-md-6">
+            <input type="text" name="query" placeholder="Search for a song or album" class="form-control" required />
+        </div>
+        <div class="col-md-3">
+            <select name="type" class="form-select">
+                <option value="track">Track</option>
+                <option value="album">Album</option>
+
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </div>
 </form>
 
-<a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>
+<div class="text-center mt-3">
+    <a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary">Return to Dashboard</a>
+</div>
